@@ -36,6 +36,7 @@ class ParseMsfoCommand extends Command
     public function handle()
     {
         $companies = Company::query()->where('is_bad', false)->get();
+        // $companies = Company::query()->where('ticker', "ACKO")->get();
 
         foreach ($companies as $company) {
             $this->parseMultiplicators($company);
@@ -47,6 +48,8 @@ class ParseMsfoCommand extends Command
     {
         $this->dom = HtmlDomParser::file_get_html("C:\OSPanel\domains\portfelius\storage\app\downloads\companies_collection\\$company->ticker.html");
 
+        dump($company->ticker);
+
         foreach (PrimaryMultiplicatorType::cases() as $multiplicator) {
             $this->addMultiplicator($multiplicator->name);
         }
@@ -56,8 +59,24 @@ class ParseMsfoCommand extends Command
 
     private function addMultiplicator($multiplicator)
     {
-        $rawMultiplicator = $this->dom->find("[field=$multiplicator]")->find('td')?->plaintext;
-        $this->multiplicators[$multiplicator] = str_replace([' ', '%'], '', $rawMultiplicator);
+        $rawMultiplicators = $this->dom->find("[field=$multiplicator]")->find('td')?->plaintext;
+
+        // если в документе не обнаружен искомый мультипликатор
+        if (!$rawMultiplicators) {
+            $this->multiplicators[$multiplicator] = array_fill(0, 10, null);
+            return;
+        }
+
+        foreach ($rawMultiplicators as $key => $value) {
+
+            $rawMultiplicators[$key] = str_replace([' ', '%'], '', $value);
+
+            if (!$value) {
+                $rawMultiplicators[$key] = null;
+            }
+        }
+
+        $this->multiplicators[$multiplicator] = $rawMultiplicators;
     }
 
 
@@ -94,7 +113,7 @@ class ParseMsfoCommand extends Command
                 'ebitda' => $this->multiplicators['ebitda'][$key],
                 'net_debt_ebitda' => $this->netDebtEbitda($key),
                 'net_income_revenue' => $this->netIncomeRevenue($key),
-                'roe' => str_replace('%', '', $this->multiplicators['roe'][$key]),
+                'roe' => $this->multiplicators['roe'][$key],
                 'p_e' => $this->multiplicators['p_e'][$key],
                 'p_s' => $this->multiplicators['p_s'][$key],
             ];
@@ -113,11 +132,25 @@ class ParseMsfoCommand extends Command
      */
     private function netDebtEbitda($key)
     {
+        // проверка существования ключа
         if (!isset($this->multiplicators['net_debt'][$key]) && !isset($this->multiplicators['ebitda'][$key])) {
             return null;
         }
 
-        return $this->multiplicators['net_debt'][$key] / $this->multiplicators['ebitda'][$key];
+        $netDebt = $this->multiplicators['net_debt'][$key];
+        $ebitda = $this->multiplicators['ebitda'][$key];
+
+        // проверка наличия значения
+        if (!$netDebt || !$ebitda) {
+            return null;
+        }
+
+        // проверка значений на 0
+        if ($netDebt == 0 || $ebitda == 0) {
+            return null;
+        }
+
+        return round(($netDebt / $ebitda), 1);
     }
 
     /**
@@ -125,10 +158,24 @@ class ParseMsfoCommand extends Command
      */
     private function netIncomeRevenue($key)
     {
+        // проверка существования ключа
         if (!isset($this->multiplicators['net_income'][$key]) && !isset($this->multiplicators['revenue'][$key])) {
             return null;
         }
 
-        return $this->multiplicators['net_income'][$key] / $this->multiplicators['revenue'][$key] * 100;
+        $netIncome = $this->multiplicators['net_income'][$key];
+        $revenue = $this->multiplicators['revenue'][$key];
+
+        // проверка наличия значения
+        if (!$netIncome || !$revenue) {
+            return null;
+        }
+
+        // проверка значений на 0
+        if ($netIncome == 0 || $revenue == 0) {
+            return null;
+        }
+
+        return round(($netIncome / $revenue * 100), 1);
     }
 }
