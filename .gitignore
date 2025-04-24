@@ -33,3 +33,6 @@ auth.json
 /storage
 .vscode
 TODO.md
+public/assets
+public/css
+public/vendor
