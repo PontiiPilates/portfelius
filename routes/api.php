@@ -20,5 +20,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::prefix('v1')->group(function () {
-    Route::get('/msfo', [MsfoController::class, 'msfo'])->name('msfo');
+    Route::get('/multiplicators', [MsfoController::class, 'multiplicators'])->name('backend.multiplicators');
 });

@@ -86,7 +86,7 @@ class ParseMsfoCommand extends Command
 
         foreach ($years as $key => $year) {
             if (strstr($year, 'LTM')) {
-                $years[$key] = Carbon::now()->subMonths(12)->isoFormat('YYYY');
+                $years[$key] = Carbon::now()->isoFormat('YYYY');
             }
         }
 

@@ -18,4 +18,4 @@ Route::get('/', function () {
     return view('welcome');
 })->name('home');
 
-Route::get('m', [FrontendController::class, 'm'])->name('m');
+Route::get('/multiplicators', [FrontendController::class, 'multiplicators'])->name('frontend.multiplicators');

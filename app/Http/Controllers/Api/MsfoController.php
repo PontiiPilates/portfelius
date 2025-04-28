@@ -3,25 +3,29 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\Company;
 use App\Models\Multiplicator;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 
 class MsfoController extends Controller
 {
-    public function msfo(Request $request)
+    public function multiplicators(Request $request)
     {
+        // если не выбран тип сортировки
         $request->sort_by
             ? $sortBy = $request->sort_by
             : $sortBy = 'revenue';
+
+        // если не выбран год
+        $request->year
+            ? $year = $request->year
+            : $year = now()->subYear()->isoFormat('YYYY');
 
         $multiplicators = Multiplicator::query()
             ->whereHas('company', function (Builder $query) {
                 $query->where('is_bad', false);
             })
-            ->where('year', 2024)
+            ->where('year', $year)
             ->orderByDesc($sortBy)
             ->paginate(10);
 
@@ -45,7 +49,7 @@ class MsfoController extends Controller
         return response()->json([
             'success' => true,
             'errors' => [],
-            'data' => $data,
+            'pager' => $multiplicators,
         ]);
     }
 }
