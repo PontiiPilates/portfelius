@@ -1,6 +1,8 @@
 # Portfelius
 Помощник в составлениия портфеля
 
+![multiplicators](preview.png)
+
 ### Команды
 
 ```shell
