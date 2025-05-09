@@ -55,9 +55,9 @@
                         </a>
                         <br><small style="color: #9CA3AF">лет</small>
                     </th>
-                    <th @if (request()->sort_by == 'net_income_revenue') style="background-color: #f8f9fa" @endif class="border-gray-200">
-                        <a href="{{ route('frontend.multiplicators', ['sort_by' => 'net_income_revenue']) }}">Net Income/Revenue
-                            @if (request()->sort_by == 'net_income_revenue')
+                    <th @if (request()->sort_by == 'net_margin') style="background-color: #f8f9fa" @endif class="border-gray-200">
+                        <a href="{{ route('frontend.multiplicators', ['sort_by' => 'net_margin']) }}">Net Margin
+                            @if (request()->sort_by == 'net_margin')
                                 <span style="color: #EF816B">▼</span>
                             @endif
                         </a>
@@ -128,9 +128,9 @@
                             @else
                                 <span class="fw-bold text-warning">н/д</span>
                             @endif
-                        <td @if (request()->sort_by == 'net_income_revenue') style="background-color: #f8f9fa" @endif>
-                            @if ($row->net_income_revenue)
-                                <span class="fw-normal">{{ $row->net_income_revenue }}</span>
+                        <td @if (request()->sort_by == 'net_margin') style="background-color: #f8f9fa" @endif>
+                            @if ($row->net_margin)
+                                <span class="fw-normal">{{ $row->net_margin }}</span>
                             @else
                                 <span class="fw-bold text-warning">н/д</span>
                             @endif

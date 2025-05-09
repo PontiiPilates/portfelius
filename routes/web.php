@@ -19,3 +19,6 @@ Route::get('/', function () {
 })->name('home');
 
 Route::get('/multiplicators', [FrontendController::class, 'multiplicators'])->name('frontend.multiplicators');
+
+Route::get('/growth-stocks', [FrontendController::class, 'growthStocks'])->name('frontend.growthStocks');
+Route::get('/dividend-stocks', [FrontendController::class, 'dividendStocks'])->name('frontend.dividendStocks');

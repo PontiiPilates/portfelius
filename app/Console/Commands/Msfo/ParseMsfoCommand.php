@@ -48,7 +48,7 @@ class ParseMsfoCommand extends Command
     {
         $this->dom = HtmlDomParser::file_get_html("C:\OSPanel\domains\portfelius\storage\app\downloads\companies_collection\\$company->ticker.html");
 
-        dump($company->ticker);
+        $this->line($company->ticker);
 
         foreach (PrimaryMultiplicatorType::cases() as $multiplicator) {
             $this->addMultiplicator($multiplicator->name);
@@ -112,10 +112,12 @@ class ParseMsfoCommand extends Command
                 'net_debt' => $this->multiplicators['net_debt'][$key],
                 'ebitda' => $this->multiplicators['ebitda'][$key],
                 'net_debt_ebitda' => $this->netDebtEbitda($key),
-                'net_income_revenue' => $this->netIncomeRevenue($key),
+                'net_margin' => $this->net_margin($key),
                 'roe' => $this->multiplicators['roe'][$key],
                 'p_e' => $this->multiplicators['p_e'][$key],
                 'p_s' => $this->multiplicators['p_s'][$key],
+                'dividend_yield' => $this->multiplicators['div_yield'][$key],
+                'dividend_payout_ratio' => $this->multiplicators['div_payout_ratio'][$key],
             ];
 
             Multiplicator::create($parameters);
@@ -156,7 +158,7 @@ class ParseMsfoCommand extends Command
     /**
      * Чистая маржинальность
      */
-    private function netIncomeRevenue($key)
+    private function net_margin($key)
     {
         // проверка существования ключа
         if (!isset($this->multiplicators['net_income'][$key]) && !isset($this->multiplicators['revenue'][$key])) {

@@ -28,12 +28,16 @@ return new class extends Migration
             $table->double('net_debt_ebitda')->nullable()->comment('коэффициент окупаемости');
 
             // рентабильность
-            $table->double('net_income_revenue')->nullable()->comment('чистая маржинальность');
+            $table->double('net_margin')->nullable()->comment('чистая маржинальность');
             $table->double('roe')->nullable()->comment('roe (%)');
 
             // показатели стоимости
             $table->double('p_e')->nullable()->comment('p/e');
             $table->double('p_s')->nullable()->comment('p/s');
+
+            // показатели стоимости
+            $table->double('dividend_yield')->nullable()->comment('дивидендная доходность');
+            $table->double('dividend_payout_ratio')->nullable()->comment('коэффициент выплаты дивидендов');
 
             // остальные
             // multiplicator1

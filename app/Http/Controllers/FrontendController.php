@@ -22,4 +22,36 @@ class FrontendController extends Controller
             'meta' => $meta,
         ]);
     }
+
+    public function dividendStocks(Request $request)
+    {
+        $response = Http::get(route('backend.dividendStocks'), $request);
+
+        $meta = [
+            'title' => 'Дивидендные акции',
+            'description' => 'Фильтр позволяет выбирать акции российских компаний с ориентиром на доходность от дивидендов',
+            'keywords' => 'дивидендные акции, фильтр дивидендных аккций',
+        ];
+
+        return view('frontend.pages.dividendStocks', [
+            "data" => $response->object(),
+            'meta' => $meta,
+        ]);
+    }
+
+    public function growthStocks(Request $request)
+    {
+        $response = Http::get(route('backend.growthStocks'), $request);
+
+        $meta = [
+            'title' => 'Акции роста',
+            'description' => 'Фильтр позволяет выбирать российские акции с повышенным потенциалом роста',
+            'keywords' => 'ростовые акции, акции роста, скринер акций, скринер российских акций, фильтр акций, фильтр российских акций',
+        ];
+
+        return view('frontend.pages.growthStocks', [
+            'data' => $response->object(),
+            'meta' => $meta,
+        ]);
+    }
 }

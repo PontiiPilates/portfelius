@@ -12,4 +12,6 @@ enum PrimaryMultiplicatorType
     case roe; // ROE
     case p_e; // P/E
     case p_s; // P/S
+    case div_yield; // Дивидендная доходность
+    case div_payout_ratio; // Коэффициент выплаты дивидендов
 }

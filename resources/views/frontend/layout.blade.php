@@ -6,9 +6,9 @@
 
     <title>@yield('title')</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="title" content=@yield('title')>
-    <meta name="description" content=@yield('description')>
-    <meta name="keywords" content=@yield('keywords') />
+    <meta name="title" content="@yield('title')">
+    <meta name="description" content="@yield('description')">
+    <meta name="keywords" content="@yield('keywords')">
     <link rel="canonical"
         href={{ route('frontend.multiplicators', ['year' => now()->subYear()->isoFormat('YYYY'), 'sort_by' => 'revenue']) }}>
 

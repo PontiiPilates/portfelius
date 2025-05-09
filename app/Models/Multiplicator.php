@@ -19,10 +19,12 @@ class Multiplicator extends Model
         'net_debt',
         'ebitda',
         'net_debt_ebitda',
-        'net_income_revenue',
+        'net_margin',
         'roe',
         'p_e',
         'p_s',
+        'dividend_yield',
+        'dividend_payout_ratio',
     ];
 
     public function company(): BelongsTo
