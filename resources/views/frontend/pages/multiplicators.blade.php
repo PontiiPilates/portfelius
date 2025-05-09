@@ -5,181 +5,70 @@
 
 @section('content')
 
-    <div class="card card-body border-0 shadow table-wrapper table-responsive">
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th class="border-gray-200">Ticker</th>
-                    <th class="border-gray-200">Year</th>
-                    <th @if (request()->sort_by == 'revenue') style="background-color: #f8f9fa" @endif class="border-gray-200">
-                        <a href="{{ route('frontend.multiplicators', ['sort_by' => 'revenue']) }}">Revenue @if (request()->sort_by == 'revenue')
-                                <span style="color: #EF816B">▼</span>
-                            @endif
-                        </a>
-                        <br><small style="color: #9CA3AF">млрд руб</small>
-                    </th>
-                    <th @if (request()->sort_by == 'net_income') style="background-color: #f8f9fa" @endif class="border-gray-200">
-                        <a href="{{ route('frontend.multiplicators', ['sort_by' => 'net_income']) }}">Net Income @if (request()->sort_by == 'net_income')
-                                <span style="color: #EF816B">▼</span>
-                            @endif
-                        </a>
-                        <br><small style="color: #9CA3AF">млрд руб</small>
-                    </th>
-                    <th @if (request()->sort_by == 'operating_income') style="background-color: #f8f9fa" @endif class="border-gray-200">
-                        <a href="{{ route('frontend.multiplicators', ['sort_by' => 'operating_income']) }}">Operating Income
-                            @if (request()->sort_by == 'operating_income')
-                                <span style="color: #EF816B">▼</span>
-                            @endif
-                        </a>
-                        <br><small style="color: #9CA3AF">млрд руб</small>
-                    </th>
-                    <th @if (request()->sort_by == 'net_debt') style="background-color: #f8f9fa" @endif class="border-gray-200">
-                        <a href="{{ route('frontend.multiplicators', ['sort_by' => 'net_debt']) }}">Net Debt @if (request()->sort_by == 'net_debt')
-                                <span style="color: #EF816B">▼</span>
-                            @endif
-                        </a>
-                        <br><small style="color: #9CA3AF">млрд руб</small>
-                    </th>
-                    <th @if (request()->sort_by == 'ebitda') style="background-color: #f8f9fa" @endif class="border-gray-200">
-                        <a href="{{ route('frontend.multiplicators', ['sort_by' => 'ebitda']) }}">EBITDA @if (request()->sort_by == 'ebitda')
-                                <span style="color: #EF816B">▼</span>
-                            @endif
-                        </a>
-                        <br><small style="color: #9CA3AF">млрд руб</small>
-                    </th>
-                    <th @if (request()->sort_by == 'net_debt_ebitda') style="background-color: #f8f9fa" @endif class="border-gray-200">
-                        <a href="{{ route('frontend.multiplicators', ['sort_by' => 'net_debt_ebitda']) }}">Net Debt/EBITDA
-                            @if (request()->sort_by == 'net_debt_ebitda')
-                                <span style="color: #EF816B">▼</span>
-                            @endif
-                        </a>
-                        <br><small style="color: #9CA3AF">лет</small>
-                    </th>
-                    <th @if (request()->sort_by == 'net_margin') style="background-color: #f8f9fa" @endif class="border-gray-200">
-                        <a href="{{ route('frontend.multiplicators', ['sort_by' => 'net_margin']) }}">Net Margin
-                            @if (request()->sort_by == 'net_margin')
-                                <span style="color: #EF816B">▼</span>
-                            @endif
-                        </a>
-                        <br><small style="color: #9CA3AF">млрд руб</small>
-                    </th>
-                    <th @if (request()->sort_by == 'roe') style="background-color: #f8f9fa" @endif class="border-gray-200">
-                        <a href="{{ route('frontend.multiplicators', ['sort_by' => 'roe']) }}">ROE @if (request()->sort_by == 'roe')
-                                <span style="color: #EF816B">▼</span>
-                            @endif
-                        </a>
-                        <br><small style="color: #9CA3AF">%</small>
-                    </th>
-                    <th @if (request()->sort_by == 'p_e') style="background-color: #f8f9fa" @endif class="border-gray-200">
-                        <a href="{{ route('frontend.multiplicators', ['sort_by' => 'p_e']) }}">P/E @if (request()->sort_by == 'p_e')
-                                <span style="color: #EF816B">▼</span>
-                            @endif
-                        </a>
-                        <br><small style="color: #9CA3AF">лет</small>
-                    </th>
-                    <th @if (request()->sort_by == 'p_s') style="background-color: #f8f9fa" @endif class="border-gray-200">
-                        <a href="{{ route('frontend.multiplicators', ['sort_by' => 'p_s']) }}">P/S @if (request()->sort_by == 'p_s')
-                                <span style="color: #EF816B">▼</span>
-                            @endif
-                        </a>
-                        <br><small style="color: #9CA3AF">лет</small>
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($dto->pager->data as $row)
-                    <tr>
-                        <td><span class="fw-bold">{{ $row->company->ticker }}</span></td>
-                        <td><span class="fw-normal">{{ $row->year }}</span></td>
-                        <td @if (request()->sort_by == 'revenue') style="background-color: #f8f9fa" @endif>
-                            @if ($row->revenue)
-                                <span class="fw-normal">{{ $row->revenue }}</span>
-                            @else
-                                <span class="fw-bold text-warning">н/д</span>
-                            @endif
-                        </td>
-                        <td @if (request()->sort_by == 'net_income') style="background-color: #f8f9fa" @endif>
-                            @if ($row->net_income)
-                                <span class="fw-normal">{{ $row->net_income }}</span>
-                            @else
-                                <span class="fw-bold text-warning">н/д</span>
-                            @endif
-                        <td @if (request()->sort_by == 'operating_income') style="background-color: #f8f9fa" @endif>
-                            @if ($row->operating_income)
-                                <span class="fw-normal">{{ $row->operating_income }}</span>
-                            @else
-                                <span class="fw-bold text-warning">н/д</span>
-                            @endif
-                        <td @if (request()->sort_by == 'net_debt') style="background-color: #f8f9fa" @endif>
-                            @if ($row->net_debt)
-                                <span class="fw-normal">{{ $row->net_debt }}</span>
-                            @else
-                                <span class="fw-bold text-warning">н/д</span>
-                            @endif
-                        <td @if (request()->sort_by == 'ebitda') style="background-color: #f8f9fa" @endif>
-                            @if ($row->ebitda)
-                                <span class="fw-normal">{{ $row->ebitda }}</span>
-                            @else
-                                <span class="fw-bold text-warning">н/д</span>
-                            @endif
-                        <td @if (request()->sort_by == 'net_debt_ebitda') style="background-color: #f8f9fa" @endif>
-                            @if ($row->net_debt_ebitda)
-                                <span class="fw-normal">{{ $row->net_debt_ebitda }}</span>
-                            @else
-                                <span class="fw-bold text-warning">н/д</span>
-                            @endif
-                        <td @if (request()->sort_by == 'net_margin') style="background-color: #f8f9fa" @endif>
-                            @if ($row->net_margin)
-                                <span class="fw-normal">{{ $row->net_margin }}</span>
-                            @else
-                                <span class="fw-bold text-warning">н/д</span>
-                            @endif
-                        <td @if (request()->sort_by == 'roe') style="background-color: #f8f9fa" @endif>
-                            @if ($row->roe)
-                                <span class="fw-normal">{{ $row->roe }}</span>
-                            @else
-                                <span class="fw-bold text-warning">н/д</span>
-                            @endif
-                        <td @if (request()->sort_by == 'p_e') style="background-color: #f8f9fa" @endif>
-                            @if ($row->p_e)
-                                <span class="fw-normal">{{ $row->p_e }}</span>
-                            @else
-                                <span class="fw-bold text-warning">н/д</span>
-                            @endif
-                        <td @if (request()->sort_by == 'p_s') style="background-color: #f8f9fa" @endif>
-                            @if ($row->p_s)
-                                <span class="fw-normal">{{ $row->p_s }}</span>
-                            @else
-                                <span class="fw-bold text-warning">н/д</span>
-                            @endif
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
+    <div class="card card-body border-0 shadow mb-4 mb-xl-0">
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item d-flex align-items-center justify-content-between px-0 border-bottom">
+                <div>
+                    <h3 class="h6 mb-1">Revenue (выручка) — общий доход компании за отчётный период.</h3>
+                    <p class="small pe-4">Рост выручки может указывать на увеличивающийся спрос на продукцию или услуги компании, успешную стратегию и общую экономическую стабильность. Важно учитывать, что высокая выручка без соответствующего роста прибыли может говорить о низкой маржинальности.</p>
+                </div>
+            </li>
+            <li class="list-group-item d-flex align-items-center justify-content-between px-0 border-bottom">
+                <div>
+                    <h3 class="h6 mb-1">Net Income (чистая прибыль) — прибыль, оставшаяся у компании после вычета всех расходов, налогов и других обязательств.</h3>
+                    <p class="small pe-4">Показывает, насколько эффективно руководство компании управляет ресурсами. Сравнение чистой прибыли с предыдущими периодами помогает понять, насколько успешно компания обходится с затратами и насколько эффективно она функционирует.</p>
+                </div>
 
-        {{-- Pager --}}
-        <div class="card-footer px-3 border-0 d-flex flex-column flex-lg-row align-items-center justify-content-between">
-            <nav aria-label="Page navigation example">
-                <ul class="pagination mb-0">
-                    @foreach ($dto->pager->links as $link)
-                        @php
-                            if (count(request()->all())) {
-                                $page = url()->full() . '&' . strstr($link->url, 'page');
-                            } else {
-                                $page = url()->full() . '?' . strstr($link->url, 'page');
-                            }
-                        @endphp
-                        <li
-                            class="page-item @if ($link->active) {{ 'active' }} @endif @if (!$link->url) {{ 'disabled' }} @endif">
-                            <a class="page-link" href="{{ $page }}">{!! str_replace(['Previous', 'Next'], ['Назад', 'Вперёд'], $link->label) !!}</a>
-                        </li>
-                    @endforeach
-                </ul>
-            </nav>
-            <div class="fw-normal small mt-4 mt-lg-0"><b>{{ $dto->pager->current_page }}</b> из
-                <b>{{ $dto->pager->last_page }}</b>
-            </div>
-        </div>
-        {{-- Pager --}}
+            </li>
+            <li class="list-group-item d-flex align-items-center justify-content-between px-0 border-bottom">
+                <div>
+                    <h3 class="h6 mb-1">Operating Income (операционнвя прибыль) — прибыль, полученная от основной деятельности компании, без учета налога на прибыль и доходов, не связанных с основной деятельностью.</h3>
+                    <p class="small pe-4">Показатель важен для оценки эффенктивности основного вида деятельности бизнеса.</p>
+                </div>
+            </li>
+            <li class="list-group-item d-flex align-items-center justify-content-between px-0 border-bottom">
+                <div>
+                    <h3 class="h6 mb-1">Net Debt (чистый долг) — долг компании, уменьшенный на свободные средства и ликвидные активы.</h3>
+                    <p class="small pe-4">Помогает оценить финансовую устойчивость компании. Чем выше чистый долг, тем выше финансовые риски, особенно в условиях экономической нестабильности. Низкий уровень чистого долга говорит о большей финансовой устойчивости.</p>
+                </div>
+            </li>
+            <li class="list-group-item d-flex align-items-center justify-content-between px-0 border-bottom">
+                <div>
+                    <h3 class="h6 mb-1">EBITDA — прибыль от операционной деятельности без учёта налогов, амортизации</h3>
+                    <p class="small pe-4">Когда новичок бумает о бизнесе, о том сколько он будет зарабатывать. Чаще всего это как раз и есть EBITDA. Затраты на себестоимость, все же учитываются. А вот когда новичок стал старше и предусмотрительнее, то в свои расчёты он включает режим налогообложения и расходы на амортизацию оборудования. Тогда это уже операционна я прибыль. Если компания занимается горной промышленностью, то амортизационные расходы будут значительными, ведь карьерную технику нужно обслуживать. EBITDA исключает эти издержки и позволяет оценить доходность от реализации полезных ископаемых. Сравнивать EBITDA горноюобывающей компании и юридической организации не следует, поскольку у последней амортизационные издержки окажутся сравнительно несущественными. А вот "конкурентов" сравнивать по EBITDA - интересно! Это полезно в капиталоёмких отрослях, где амортизационные расходы могут значительно различаться.</p>
+                </div>
+            </li>
+            <li class="list-group-item d-flex align-items-center justify-content-between px-0 border-bottom">
+                <div>
+                    <h3 class="h6 mb-1">Net Debt/EBITDA — коэффициент долговой нагрузки компании</h3>
+                    <p class="small pe-4">Указывает на то,  сколько лет потребуется компании, чтобы за счет EBITDA погасить весь чистый долг. Отрицательное значение показателя означает, что активы компании стоят больше долговых обязательств. В таком случае компания может полностью расплатиться по своим долгам.</p>
+                </div>
+            </li>
+            <li class="list-group-item d-flex align-items-center justify-content-between px-0 border-bottom">
+                <div>
+                    <h3 class="h6 mb-1">Net Margin — прибыльность.</h3>
+                    <p class="small pe-4">Показывает, какую часть выручки составляет чистая прибыль компании. Показывает эффективность компании в части удержания прибыли после всех расходов, связанных с ведением бизнеса.</p>
+                </div>
+            </li>
+            <li class="list-group-item d-flex align-items-center justify-content-between px-0 border-bottom">
+                <div>
+                    <h3 class="h6 mb-1">ROE — коффициент эффективности использования собственных средств.</h3>
+                    <p class="small pe-4">Показывает сколько чистой прибыли компания зарабатывает на 1 рубль собственных средств. Показатель свидетельствует о том, насколько эффективно собственники используют средства вложенные бизнес. Удобен для сравнения компаний в определённом секторе экономики.</p>
+                </div>
+            </li>
+            <li class="list-group-item d-flex align-items-center justify-content-between px-0 border-bottom">
+                <div>
+                    <h3 class="h6 mb-1">P/E — соотношение между ценой акций и прибылью на акцию</h3>
+                    <p class="small pe-4">Позволяет оперативно выяснить, недооценён или переоценён актив. Если P/E компании составляет 30, это значит, что инвесторы готовы заплатить 30 рублей за каждый рубль прибыли компании. Это указывает на то, что компания "перегрета". С другой стороны, 5 может указывать на недооценку компании, так как инвесторы готовы платить всего 5 рублей за каждый рубль прибыли компании. Показателем удобно пользоваться при сравнении компаний из одной отрасли.</p>
+                </div>
+            </li>
+            <li class="list-group-item d-flex align-items-center justify-content-between px-0">
+                <div>
+                    <h3 class="h6 mb-1">P/S — соотношение рыночной капитализации компании к её выручке.</h3>
+                    <p class="small pe-4">Отражает то, сколько платит инвестор за единицу выручки. Применяется, как инструмент поиска недооценённых акций. Плохо подходит для оценки страховых и финансовых компаний. Лучше сравнивать компании из одной отрасли. P/S больше 2 указывает на то, что компания переоценена. От 1 до 2 - на то, что компании оптимально оценена рынком. P/S меньше 1 указывает на то, что компания недооценена и может иметь потенциал роста.</p>
+                </div>
+            </li>
+        </ul>
     </div>
+
 @endsection

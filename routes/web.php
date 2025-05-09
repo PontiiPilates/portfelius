@@ -18,7 +18,7 @@ Route::get('/', function () {
     return view('welcome');
 })->name('home');
 
-Route::get('/multiplicators', [FrontendController::class, 'multiplicators'])->name('frontend.multiplicators');
-
+Route::get('/primary-parameters', [FrontendController::class, 'primaryParameters'])->name('frontend.primaryParameters');
 Route::get('/growth-stocks', [FrontendController::class, 'growthStocks'])->name('frontend.growthStocks');
 Route::get('/dividend-stocks', [FrontendController::class, 'dividendStocks'])->name('frontend.dividendStocks');
+Route::get('/multiplicators', [FrontendController::class, 'multiplicators'])->name('frontend.multiplicators');

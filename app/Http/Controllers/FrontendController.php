@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Http;
 
 class FrontendController extends Controller
 {
-    public function multiplicators(Request $request)
+    public function primaryParameters(Request $request)
     {
         $response = Http::get(route('backend.multiplicators'), $request);
 
@@ -17,7 +17,7 @@ class FrontendController extends Controller
             'keywords' => 'мультипликатор, акции российских компаний',
         ];
 
-        return view('frontend.pages.multiplicators', [
+        return view('frontend.pages.primary-parameters', [
             'dto' => $response->object(),
             'meta' => $meta,
         ]);
@@ -51,6 +51,19 @@ class FrontendController extends Controller
 
         return view('frontend.pages.growthStocks', [
             'data' => $response->object(),
+            'meta' => $meta,
+        ]);
+    }
+
+    public function multiplicators(Request $request)
+    {
+        $meta = [
+            'title' => 'Мультипликаторы',
+            'description' => 'Краткое описание основных мультипликаторов',
+            'keywords' => 'revenue, выручка, net income, чистая прибыль',
+        ];
+
+        return view('frontend.pages.multiplicators', [
             'meta' => $meta,
         ]);
     }
