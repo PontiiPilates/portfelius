@@ -22,7 +22,7 @@
 
             {{-- Home --}}
             <li class="nav-item">
-                <a href="#" class="nav-link d-flex align-items-center">
+                <a href="{{ route('home') }}" class="nav-link d-flex align-items-center">
                     <span class="sidebar-icon">
                         <img class="icon icon-xs" src="/assets/img/brand/light.svg" height="20" width="20" alt="logo">
                     </span>
@@ -40,7 +40,11 @@
                             <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path>
                         </svg>
                     </span>
+                    @if(route('frontend.primaryParameters') == request()->url())
+                    <span class="sidebar-text" style="color: #EF816B"><b>Основные показатели</b></span>
+                    @else
                     <span class="sidebar-text">Основные показатели</span>
+                    @endif
                 </a>
             </li>
             {{-- Primary parameters --}}
@@ -54,7 +58,11 @@
                             <path d="M5.205 10.787a7.6 7.6 0 0 0 1.804 1.352c-1.118 1.007-4.929 2.028-5.054 1.903-.126-.127.737-4.189 1.839-5.18.346.69.837 1.35 1.411 1.925" />
                         </svg>
                     </span>
+                    @if(route('frontend.growthStocks') == request()->url())
+                    <span class="sidebar-text" style="color: #EF816B"><b>Акции роста</b></span>
+                    @else
                     <span class="sidebar-text">Акции роста</span>
+                    @endif
                 </a>
             </li>
             {{-- Growth --}}
@@ -68,7 +76,11 @@
                             <path d="M0 12.5A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5V6.85L8.129 8.947a.5.5 0 0 1-.258 0L0 6.85z" />
                         </svg>
                     </span>
+                    @if(route('frontend.dividendStocks') == request()->url())
+                    <span class="sidebar-text" style="color: #EF816B"><b>Дивидендные акции</b></span>
+                    @else
                     <span class="sidebar-text">Дивидендные акции</span>
+                    @endif
                 </a>
             </li>
             {{-- Dividend --}}
@@ -82,7 +94,11 @@
                             <path d="M4.176 9.032a.5.5 0 0 0-.656.327l-.5 1.7a.5.5 0 0 0 .294.605l4.5 1.8a.5.5 0 0 0 .372 0l4.5-1.8a.5.5 0 0 0 .294-.605l-.5-1.7a.5.5 0 0 0-.656-.327L8 10.466z"/>
                           </svg>
                     </span>
+                    @if(route('frontend.multiplicators') == request()->url())
+                    <span class="sidebar-text" style="color: #EF816B"><b>Мультипликаторы</b></span>
+                    @else
                     <span class="sidebar-text">Мультипликаторы</span>
+                    @endif
                 </a>
             </li>
             {{-- Multiplicators --}}

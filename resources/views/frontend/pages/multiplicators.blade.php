@@ -2,6 +2,7 @@
 
 @section('title', $meta['title'])
 @section('description', $meta['description'])
+@section('canonical', request()->url())
 
 @section('content')
 

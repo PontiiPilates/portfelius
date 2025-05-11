@@ -9,8 +9,7 @@
     <meta name="title" content="@yield('title')">
     <meta name="description" content="@yield('description')">
     <meta name="keywords" content="@yield('keywords')">
-    <link rel="canonical"
-        href={{ route('frontend.multiplicators', ['year' => now()->subYear()->isoFormat('YYYY'), 'sort_by' => 'revenue']) }}>
+    <link rel="canonical" href="@yield('canonical')">
 
     <meta property="og:type" content="website">
     <meta property="og:url" content={{ env('APP_URL') }}>

@@ -3,6 +3,7 @@
 @section('title', $meta['title'])
 @section('description', $meta['description'])
 @section('keywords', $meta['keywords'])
+@section('canonical', request()->url())
 
 @section('content')
 

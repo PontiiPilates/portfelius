@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('growth-stocks');
 })->name('home');
 
 Route::get('/primary-parameters', [FrontendController::class, 'primaryParameters'])->name('frontend.primaryParameters');
