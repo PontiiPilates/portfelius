@@ -24,13 +24,14 @@
     <meta property="twitter:image" content="/assets/img/brand/light.svg">
 
     <!-- Favicon -->
-    <link rel="apple-touch-icon" sizes="120x120" href="/assets/img/favicon/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon/favicon-16x16.png">
-    <link rel="manifest" href="/assets/img/favicon/site.webmanifest">
-    <link rel="mask-icon" href="/assets/img/favicon/safari-pinned-tab.svg" color="#ffffff">
-    <meta name="msapplication-TileColor" content="#ffffff">
-    <meta name="theme-color" content="#ffffff">
+    {{-- <link rel="apple-touch-icon" sizes="120x120" href="/assets/img/favicon/apple-touch-icon.png"> --}}
+    {{-- <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon/favicon-32x32.png"> --}}
+    {{-- <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon/favicon-16x16.png"> --}}
+    <link rel="icon" href="{{env("APP_URL")}}/favicon.svg" type="image/svg+xml">
+    {{-- <link rel="manifest" href="/assets/img/favicon/site.webmanifest"> --}}
+    {{-- <link rel="mask-icon" href="/assets/img/favicon/safari-pinned-tab.svg" color="#ffffff"> --}}
+    {{-- <meta name="msapplication-TileColor" content="#ffffff"> --}}
+    {{-- <meta name="theme-color" content="#ffffff"> --}}
 
     <!-- Sweet Alert -->
     <link type="text/css" href="/vendor/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet">
@@ -40,6 +41,24 @@
 
     <!-- Portfelius CSS -->
     <link type="text/css" href="/css/portfelius.css" rel="stylesheet">
+
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+    (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+    m[i].l=1*new Date();
+    for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+    k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+    (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+    ym(101770292, "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true,
+            webvisor:true
+    });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/101770292" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
 </head>
 
 <body>
@@ -50,7 +69,9 @@
 
         @yield('content')
 
-        @include('frontend.components.footer')
+        @if (request()->url() != route('frontend.home'))
+            @include('frontend.components.footer')
+        @endif
     </main>
 
     <!-- Core -->

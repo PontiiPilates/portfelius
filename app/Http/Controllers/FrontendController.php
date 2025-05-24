@@ -7,14 +7,27 @@ use Illuminate\Support\Facades\Http;
 
 class FrontendController extends Controller
 {
+    public function home(Request $request)
+    {
+        $meta = [
+            'title' => 'Portfelius',
+            'description' => 'Аналитическая платформа для ценных бумаг российских компаний на рынке ММВБ',
+            'keywords' => 'аналитическая платформа, ценные бумаги, ммвб',
+        ];
+
+        return view('frontend.pages.home', [
+            'meta' => $meta,
+        ]);
+    }
+
     public function primaryParameters(Request $request)
     {
         $response = Http::get(route('backend.multiplicators'), $request);
 
         $meta = [
-            'title' => 'Мультипликаторы',
+            'title' => 'Основные показатели',
             'description' => 'Основные финансовые показатели акций российских компаний',
-            'keywords' => 'мультипликатор, акции российских компаний',
+            'keywords' => 'мультипликаторы, акции российских компаний',
         ];
 
         return view('frontend.pages.primary-parameters', [
@@ -45,8 +58,8 @@ class FrontendController extends Controller
 
         $meta = [
             'title' => 'Акции роста',
-            'description' => 'Фильтр позволяет выбирать российские акции с повышенным потенциалом роста',
-            'keywords' => 'ростовые акции, акции роста, скринер акций, скринер российских акций, фильтр акций, фильтр российских акций',
+            'description' => 'Фильтр показывает акции с высоким потенциалом проста на ММВБ.',
+            'keywords' => 'акции роста, ростовые акции, акции с повышенным потенциалом, акции с высоким потенциалом',
         ];
 
         return view('frontend.pages.growthStocks', [

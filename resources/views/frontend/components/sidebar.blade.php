@@ -1,6 +1,6 @@
 {{-- Adaptive navigation --}}
 <nav class="navbar navbar-dark navbar-theme-primary px-4 col-12 d-lg-none">
-    <a class="navbar-brand me-lg-5" href="{{ route('home') }}">
+    <a class="navbar-brand me-lg-5" href="{{ route('frontend.home') }}">
         <img class="navbar-brand-dark" src="/assets/img/brand/light.svg" alt="logo" />
         <img class="navbar-brand-light" src="/assets/img/brand/dark.svg" alt="logo" />
     </a>
@@ -22,7 +22,7 @@
 
             {{-- Home --}}
             <li class="nav-item">
-                <a href="{{ route('home') }}" class="nav-link d-flex align-items-center">
+                <a href="{{ route('frontend.home') }}" class="nav-link d-flex align-items-center">
                     <span class="sidebar-icon">
                         <img class="icon icon-xs" src="/assets/img/brand/light.svg" height="20" width="20" alt="logo">
                     </span>

@@ -14,10 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return redirect('growth-stocks');
-})->name('home');
-
+Route::get('/', [FrontendController::class, 'home'])->name('frontend.home');
 Route::get('/primary-parameters', [FrontendController::class, 'primaryParameters'])->name('frontend.primaryParameters');
 Route::get('/growth-stocks', [FrontendController::class, 'growthStocks'])->name('frontend.growthStocks');
 Route::get('/dividend-stocks', [FrontendController::class, 'dividendStocks'])->name('frontend.dividendStocks');
